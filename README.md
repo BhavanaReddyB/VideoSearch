@@ -1,3 +1,9 @@
+This is a video browser.
+Utilizes Youtube API to fetch the videos requested and displays them.
+
+Languages: ReactJS
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
