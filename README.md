@@ -3,6 +3,8 @@ Utilizes Youtube API to fetch the videos requested and displays them.
 
 Languages: ReactJS
 
+Note: const KEY has to be updated with API key created
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
