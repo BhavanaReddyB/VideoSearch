@@ -1,12 +1,26 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import youtube from '../components/apis/youtube';
+import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
 
 class App extends React.Component{
-    onTermSubmit = term => {
-        youtube.get("/search",{
+    state = {videos:[], selectedVideo: null};
+
+    componentDidMount(){
+        this.onTermSubmit("buildings");
+    }
+
+    onTermSubmit = async term => {
+        const response = await youtube.get("/search",{
             params:{q: term}
         });
+    this.setState({videos: response.data.items.slice(1,)});
+    this.setState({selectedVideo: response.data.items[0]});
+    }
+
+    onVideoSelect = (video) =>{
+        this.setState({selectedVideo: video});
     }
 
     render(){
@@ -14,6 +28,18 @@ class App extends React.Component{
             // Adds gutter around the search bar on either side
             <div className="ui container"> 
                 <SearchBar onFormSubmit={this.onTermSubmit}/>
+                <div className="ui grid">
+                    <div className="ui row">
+                        <div className="eleven wide column">
+                            <VideoDetail video={this.state.selectedVideo}/>
+                        </div>
+                        <div className="five wide column">
+                            <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
+                        </div>
+                    
+                    </div>
+                    
+                </div>
             </div>
         );
     }
